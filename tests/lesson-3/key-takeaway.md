@@ -94,37 +94,57 @@ let tenbien = {
 nhưng nội dung bên trong, các value có thể thay đổi được
 
 vì vậy  **const với object** thì có thể **thay đổi được**, gán lại dc
-ex:
-```
-
-```
 
 - hàm delete để xóa thuộc tính của object
-delete object.property
+`delete <object>.<property>`
 
 ----------------------
 ### Logical operator: toán tử logic
-- && : 2 vế điều kiện phải đúng
-- || : 1 trong 2 vế đúng
-- !: phủ định/đảo ngược
+- **&&** : 2 vế điều kiện phải đúng (và)
+- **||** : 1 trong 2 vế đúng (hoặc)
+- **!**: phủ định/đảo ngược
 
 ---------------------
 ### Function: hàm
+Là 1 đoạn code đc đặt tên và tái sử dụng nhiều lần, dùng để thực hiện 1 nhiệm vụ hoặc 1 tính toán cụ thể
 
-- syntax:
+**Syntax:**
+```
+    function <tên hàm>(){
+        //đoạn code
+    }
+```
+
+*ex:*
+```
 function minhThu(){
     console.log('xin chào')
 }
---> đây là hàm ko có tham số
+```
+--> đây là **hàm ko có tham số**
 
 - gọi hàm: tênHàm();
 
-- hàm có tham số:
+**Hàm có tham số (parameter)**
+*ex:*
+```
 function minhThu(name){
     console.log('xin chao ' + name)
 }
+```
+**Gọi hàm và truyền tham số vào:**
+` minhThu("Thu");`
 
-gọi hàm: minhThu("Thu");
+**Return value:**
+_ex:_
+```
+function getMax(a,b){
+    if (a > b){
+        return a;
+    }
+    return b;
+}
+```
 
 ----
 
