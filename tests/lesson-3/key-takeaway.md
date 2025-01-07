@@ -84,8 +84,8 @@ console.log(student["name"];)
 ex:
 ```
 let tenbien = {
-    "key":value,
-    "key1":value1
+    key:value,
+    key1:value1
 }
 ```
 - có thể khai báo object bên trong object
