@@ -46,8 +46,9 @@ Nhưng hiện tại Git chiếm phần lớn
 
 # Javascript
 - Nó là 1 nn lập trình, đặt tên ăn theo Java
-- Ra đời năm 1995, đang là nn đứng top1 năm 2023, và đã top1 trong 10 năm, là 1 nn hot
-##Làm sao để code js chạy dc?##
+- Ra đời năm 1995, đang là nn đứng top1 năm 2023, và đã top1 trong 10 năm, là 1 ngôn ngữngữ hot
+
+## Làm sao để code js chạy dc?
 - Do phần mềm trình duyệt hỗ trợ chạy js, chẳng hạn như chrome, 
 - có các engine
 1. Edge: Chaka
