@@ -42,7 +42,7 @@ vừa TẠO vừa CHUYỂN sang nhánh đã tạo luôn
 > - tạo nhánh để có vùng làm việc mới, ko ảnh hưởng đến vùng làm việc đã ổn định
 > - khi tạo nhánh thì mình tạo 1 bản sao và có thể backup lại việc mình đã làm
 
-**Tips:** luôn tạo branch mới mỗi khi muốn thực hiện 1 lệnh copy từ internet, đềề phòng rủi ro mất code
+**Tips:** luôn tạo branch mới mỗi khi muốn tihực hiện 1 lệnh copy từ internet, đềề phòng rủi ro mất code
 
 ---
 ### File gitignore
