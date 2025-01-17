@@ -147,6 +147,26 @@ function getMax(a,b){
 ```
 
 ----
+### Vòng lặp for - in trong object
 
+để duyệt qua các key trong object 
 
+**Syntax**
+```
+for (<var> in <object>) {
+    //code thực thi 
+}
+```
 
+**Ex:**
+```
+const person = {
+    name: "Alice",
+    age: 25,
+    city: "Hanoi"
+};
+
+for (let key in person) {
+    console.log(`Key: ${key}, Value: ${person[key]}`);
+}
+```
