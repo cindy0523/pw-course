@@ -170,3 +170,13 @@ for (let key in person) {
     console.log(`Key: ${key}, Value: ${person[key]}`);
 }
 ```
+---
+### Vòng lặp for - of
+để duyệt qua các phần tử trong mảng
+
+**Syntax**
+```
+for (<var> of <array> ){
+    // code thực thi
+}
+```
