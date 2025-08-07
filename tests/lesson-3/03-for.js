@@ -76,8 +76,8 @@ const listRevenue = [
  
 let tongDoanhThu = 0;
  
-for (let i = 0; i <= listRevenue.length; i++) {
+for (let i = 0; i < listRevenue.length; i++) {
     tongDoanhThu += listRevenue[i].total;
 }
  
- 
+console.log(`Tổng doanh thu là: ${tongDoanhThu}`);

@@ -31,5 +31,7 @@ console.log("tổng các giá trị số của các thuộc tính trong 1 đối
 Ví dụ object sutdent = {"name": "Alex", "age": 10} thì sẽ tạo ra 1 mảng {"name", "age"}
 */
  
- 
+for (const key in student) {
+    console.log(key);
+};
  

@@ -103,7 +103,22 @@ Quy tắc giải mã như sau:
 Sau đó, gọi hàm decryptCode với mật mã là K11 Challenge và in kết quả ra console.
 */
  
+function decryptCode(code) {
+    let result = '';
+    for (let i = 0; i < code.length; i++) {
+        let char = code[i];
+        if (char === char.toUpperCase() && char != char.toLowerCase()) {
+            result += char.toLowerCase();
+        } else if (char === char.toLowerCase() && char != char.toUpperCase()) {
+            result += char.toUpperCase();
+        } else {
+            result += char;
+        }
+    }
+    return result;
+};
  
+console.log(`Mật mã được giải là: ${decryptCode("K11 Challenge")}`);
  
 /*
 5. Trở về Trái Đất
@@ -122,3 +137,9 @@ và gian lận.
 đối thủ khác.
 Chúc bạn may mắn và giành chiến thắng trong cuộc thi "K11"! ^^
 */
+
+function returnToEarth() {
+    console.log("Chuẩn bị trở về Trái Đất!");
+};
+
+returnToEarth();

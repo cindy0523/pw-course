@@ -1,4 +1,3 @@
- 
 /* KIẾN THỨC BỔ SUNG ĐỂ LÀM BÀI
 Bản chất 1 chuỗi cũng là 1 mảng
 Ví dụ chuỗi "Playwright" bản chất là 1 mảng gồm các kí tự

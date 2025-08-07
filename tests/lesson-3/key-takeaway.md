@@ -60,7 +60,7 @@ Tất cả tên file, đường dẫn tới file bỏ trong file .gitifnore thì
 tức là file đã đc chỉnh sửa, nhưng chưa lên Stage để commitcommit
  
 ---
-## Convention: quy tắc
+## Convention: bộ quy tắc
 - giúp cho code theo quy tắc để dễ nhìn
 - ngkhac nhìn vào có thể hiểu được
  
@@ -69,6 +69,15 @@ tức là file đã đc chỉnh sửa, nhưng chưa lên Stage để commitcommi
 2. kebab-case: tên file
 3. camelCase: tên biến
 4. PascalCase: tên class
+
+**Commit convention**
+`<type>:<short description>`
+
+- **chore**: sửa nhỏ lẻ, chính tả, xóa file k dùng tới
+- **feat**: thêm tính năng cho case mới
+- **fix**: sửa lỗi 1 test trước đó
+- **short description**: mô tả ngắn gọn, EN hoặc VIE ko dấu
+
 ---
 ### Object: đối tượng
 **Object:** dùng để lưu trữ tập hợp các giá trị vào cùng 1 biến hoặc hằng sốsố
