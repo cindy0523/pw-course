@@ -26,3 +26,25 @@
 - Nên dùng Xpath tương đối
 
 ### Playwright Basic syntax
+- **test**: đơn vị cơ bản để khai báo 1 test
+Cú pháp:
+
+```
+import { test } from '@playwright/test'
+
+test('Testcase name', async ({ }) => {
+    //code here 
+})
+```
+
+- **step**: đơn vị nhỏ hơn test, để khai báo từng step của 1 testcase
+Cú pháp:
+```
+await test.step('Tên step', async () => {
+  // code here
+})
+```
+**Lưu ý:**
+- Step nên được map 1-1 mới Step trong testcase để dễ maintain hơn
+Để lỡ báo lỗi thì Playwright sẽ trả lỗi ở thẳng step đó
+
