@@ -55,7 +55,7 @@ Vd file env
 ---
 ## for...in, forEach, for...of
 ### 1. for...in (Object - trả key)
-dùng để lặp qua các key của object
+dùng để lặp qua các **key của object**, **index của array**
  ko nên dùng cho array, vì nó sẽ lặp cả thuộc tính dc thêm thủ công vô array
 **Cú pháp**
 ```
@@ -78,8 +78,8 @@ for (const key in person) {
 // job Tester
 ```
 ### 2. forEach (Array - trả index, value)
-dùng để: lặp qua từng element của array
-ko dùng cho object
+dùng để: lặp qua từng **element** của **array**
+**ko dùng cho object**
 ko thể dùng break/continue trong forEach
 **Cú pháp:**
 ```
@@ -100,7 +100,7 @@ arr.forEach(function (value, index, array) {
 // 3 4
 ```
 ### 3. for...of (Array, String, Set, Map - trả value)
-dùng để lặp qua từng giá trị của object có thể lặp (iterable) như array, string, map, set,...
+dùng để lặp qua từng **value** của **object/array** có thể lặp (iterable) như array, string, map, set,...
 ko dùng cho object (nếu muốn lặp qua object, dùng for...in)
 **Cú pháp**
 ```

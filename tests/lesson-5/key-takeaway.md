@@ -48,3 +48,59 @@ await test.step('Tên step', async () => {
 - Step nên được map 1-1 mới Step trong testcase để dễ maintain hơn
 Để lỡ báo lỗi thì Playwright sẽ trả lỗi ở thẳng step đó
 
+**Navigate tới 1 link:**
+```
+await page.goto('https://google.com');
+```
+**Click**
+1. Single click:
+```
+await page.locator('//button').click();
+```
+
+2. Double click:
+```
+await page.locator('//button').dbclick();
+```
+
+3. Click chuột phải:
+```
+await page.locator('//button').click({
+  button: 'right'
+})
+```
+
+4. Click và bấm kèm phím khác:
+```
+await page.locator('//button').click({
+  modifiers: ['Shift'],
+})
+```
+
+5. **fill**: giống việc paste content vào 1 ô input field
+```
+await page.locator('//button').fill('Playwright Vietnam);
+```
+
+6. **pressSequentially:** giống việc gõ từng chữ cái vô ô
+```
+await page.logcator('//button').pressSequentially('Playwright VN', {delay: 100})
+```
+- Delay là khoảng thời gian chờ tính bằng mili giây
+100ms = 0.1s
+
+7. checkbox:
+- **check vào checkbox**
+```
+await page.locator('//input').check();
+```
+- **uncheck vào checkbox**
+```
+await page.locator('//input').uncheck();
+```
+- **setChecked(): true/false**
+```
+await page.locator('//input').setChecked(true); //tick vào checkbox
+
+await page.locator('//input').setChecked(false);// bỏ tick checkbox
+```
