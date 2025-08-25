@@ -6,7 +6,7 @@ nhập đầy đủ ttin, click button Register
 
 import { test } from '@playwright/test';
 
-test('test1', async ({page}) => {
+test('test1', async ({ page }) => {
     await test.step('Truy cập trang: https://material.playwrightvn.com/', async () => {
         await page.goto('https://material.playwrightvn.com/')
     });
@@ -42,5 +42,21 @@ test('test1', async ({page}) => {
     await test.step('input DOB', async () => {
         await page.locator("input#dob").fill("2002-05-23");
     });
+
+    await test.step('input "Profile Picture" ', async () => {
+        await page.setInputFiles('#profile', 'C:/Users/cindy/OneDrive/Hình ảnh/445226810_2127081931004072_5032923935917487166_n.jpg')
+    }); //profile picture input file
+
+    await test.step('input Biography', async () => {
+        await page.locator('textarea#bio').fill("Nice to see you");
+    });
+
+    await test.step('set Rate Us', async () => {
+        await page.locator 
+    });
+
+    await test.step('click on Register button', async () => {
+        await page.locator("//button[@type='submit']").click(); //last step
+    })
 })
 
