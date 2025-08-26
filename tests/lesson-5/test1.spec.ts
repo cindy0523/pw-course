@@ -4,7 +4,7 @@ click "Bài học 1: Register Page"
 nhập đầy đủ ttin, click button Register
 */
 
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 test('test1', async ({ page }) => {
     await test.step('Truy cập trang: https://material.playwrightvn.com/', async () => {
@@ -52,11 +52,48 @@ test('test1', async ({ page }) => {
     });
 
     await test.step('set Rate Us', async () => {
-        await page.locator 
+        await page.locator("//input[@id='rating']").evaluate(el => {
+            (el as HTMLInputElement).value = '8';
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+        await expect(page.locator("//span[@id='ratingValue']")).toHaveText('8');
+    });
+
+    await test.step('set Favorite color', async () => {
+        await page.locator("//input[@id='favcolor']").evaluate(el => {
+            (el as HTMLInputElement).value = '#62b8f9';
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+        await expect(page.locator("//span[@id='colorDisplay']")).toHaveText('#62b8f9');
+    });
+
+    await test.step('hover tooltip', async () => {
+        await page.locator("//div[@class='tooltip']").hover();
+        await expect(page.locator("//span[@class='tooltiptext']")).toBeVisible();
+        await expect(page.locator("//span[@class='tooltiptext']")).toHaveText("Subscribe to our newsletter for updates")
+    });
+
+    await test.step('check vao checkbox Newsletter', async () => {
+        await page.locator("//input[@id='newsletter']").check();
+        await expect(page.locator("//input[@id='newsletter']")).toBeChecked();
+    });
+
+    await test.step('toggle ON Enable Feature', async () => {
+        await page.locator("//span[@class='slider round']").check();
+        await expect(page.locator("//span[@class='slider round']")).toBeChecked();
+    });
+
+    await test.step('đánh giá 5 sao', async () => {
+        const box = await page.locator("//div[@id='starRating']").boundingBox();
+        if (box) {
+            await page.mouse.click(box.x + box.width * 0.7, box.y + box.height / 2);
+        };
     });
 
     await test.step('click on Register button', async () => {
         await page.locator("//button[@type='submit']").click(); //last step
-    })
-})
+    });
+});
 
