@@ -8,41 +8,36 @@ Yêu cầu:
 - Tạo một phương thức findBook để tìm sách theo tiêu đề.
 */
 
-class Book {
-    bookId: number;
-    bookName: string;
-
-    constructor(bookId: number, bookName: string) {
-        this.bookId = bookId;
-        this.bookName = bookName;
-    };
-};
-
 class Library {
     name: string;
     location: string;
-    books: Book[];
+    books: string[];
 
-    constructor(name: string, location: string) {
+    constructor(name: string, location: string, books: string[] = []) {
         this.name = name;
         this.location = location;
         this.books = [];
     };
 
     //thêm sách
-    addBook(newBook: Book) {
+    addBook(newBook: string) {
         this.books.push(newBook);
     };
 
-    //tìm sách thep title
-    findBook(bookName: string): Book | undefined {
-        return this.books.find(book => book.bookName.toLowerCase() === bookName.toLowerCase());
+    //tìm sách theo title
+    findBook(title: string) {
+        const bookList = this.books;
+        if (bookList.some(bookName => bookName === title)) {
+            console.log(`Tìm thấy sách là ${title}`);
+        } else {
+            console.log(`Không tìm thấy sách ${title}`);
+        };
     };
 };
 
 let myLibrary = new Library ("Thư viện Cute", "HCM");
 
-myLibrary.addBook(new Book(2, "Sách toán"));
-myLibrary.addBook(new Book(3, "Sách văn"));
+myLibrary.addBook("sách toán");
+myLibrary.addBook("sách văn");
 
-console.log(myLibrary.findBook("Sách toán"));
+myLibrary.findBook("sách ");

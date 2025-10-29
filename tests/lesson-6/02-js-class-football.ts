@@ -4,23 +4,29 @@ Hãy tạo một class để lưu trữ thông tin cầu thủ
 và các phương thức để thao tác với dữ liệu này.
 */
 
-class Football {
-    id: number;
-    name: string;
-    age: number;
-    team: string;
+class FootballTeam {
+    teamName: string;
+    playersName: string[];
 
-    constructor(id: number, name: string, age: number, team: string) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.team = team;
+    constructor(teamName: string, playersName: string[] = []) {
+        this.teamName = teamName;
+        this.playersName = playersName;
     };
 
-    getInfo() {
-        console.log(`Thông tin cầu thủ: ID: ${this.id}, tên: ${this.name}, tuổi: ${this.age}, đội: ${this.team}`);
+    addPlayer(newPlayer: string) {
+        this.playersName.push(newPlayer);
+    };
+
+    playerList() {
+        console.log(`Football team is ${this.teamName}`);
+        console.log(`Member list: ${this.playersName.join(", ")}`);
     };
 };
 
-let football1 = new Football(1, "David", 28, "Denmark");
-football1.getInfo();
+const footballTeam1 = new FootballTeam("Cute team");
+
+footballTeam1.addPlayer("Thư");
+footballTeam1.addPlayer("Su");
+footballTeam1.addPlayer("Bon");
+
+footballTeam1.playerList();

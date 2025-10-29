@@ -17,12 +17,12 @@ class Product {
     amount: number;
     discount: number;
 
-    constructor(name: string, price: number, amount: number, discount: number= 0) {
+    constructor(name: string, price: number, amount: number, discount: number) {
         this.name = name;
         this.price = price;
         this.amount = amount;
-        this.discount = discount; //phần trăm giảm giá
-    };
+        this.discount = discount;
+    }
 };
 
 class Order {
@@ -39,12 +39,17 @@ class Order {
     };
 
     // phương thức addItem để thêm sản phẩm vào đơn hàng.
-    addItem(newItem: Product) {
+    addItem(newItem: Product): void {
         this.items.push(newItem);
     };
     // phương thức calculateTotal để tính tổng số tiền của đơn hàng.
-    calculateTotal() {
-        return 
+    calculateTotal(): number {
+        this.totalAmount = this.items.reduce((sum, item) => {
+            const priceAfterDiscount = item.price * (1 - item.discount/ 100);
+            return sum + priceAfterDiscount * item.amount; 
+        }, 0);
+
+        return this.totalAmount;
     };
 };
 
@@ -52,3 +57,7 @@ let order1 = new Order(1, "Andy");
 
 order1.addItem(new Product("notebook", 100, 2, 0));
 order1.addItem(new Product("dress", 200, 1, 0));
+
+order1.calculateTotal();
+
+console.log(order1);
