@@ -1,7 +1,0 @@
-Giải thích câu lệnh git stash
-- stash (giấu đi)
-git stash khi bạn đang code dở, chưa muốn commit mà cần chuyển branch gấp để làm việc khác quan trọng hơn
-git stash sẽ lưu lại các công việc đang làm vào vùng nhớ tạm
-
-Giải thích câu lệnh git stash pop
-- git stash pop lấy ra các công việc đang làm dở từ vùng nhớ tạm ra làm tiếp
