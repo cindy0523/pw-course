@@ -1,0 +1,159 @@
+Câu lệnh git commit --amend:
+dùng để chỉnh sửa commit message gần nhất 
+
+Câu lệnh git reset HEAD~3:
+dùng để xóa 3 commit gần nhất, nhưng ko xóa file, các file đó sẽ nằm trong vùng working directory (đã add) và sẵn sàng commit lại
+
+Liệt kê các branch, các commit và các file theo từng vùng ở các branch: main, feature A, feature B
+sau khi thao tác các lệnh sau:
+a. Tạo thư mục lesson-8
+nằm trong local
+---
+b. Tạo file: file1, file2, file3
+file1, file2, file3 nằm trong local, bên trong folder lesson-8
+---
+c. Chạy lệnh: git init
+file1, file2, file3:
+- vùng: working dir
+- branch: main
+---
+d. Chạy lệnh: git add file1
+file1:
+- vùng: staging
+- branch: main
+file2, file3:
+- vùng: working dir
+- branch: main
+---
+e. Chạy lệnh: git commit -m”init project”
+file1: 
+- vùng: repository
+- commit: ”init project”
+- branch: main
+file2, file3:
+- vùng: working dir
+- branch: main
+---
+f. Chạy lệnh: git checkout -b feat/feature-a
+file1: 
+- vùng: repository
+- commit: ”init project”
+- branch: feat/feature-a
+file2, file3:
+- vùng: working dir
+- branch: feat/feature-a
+---
+g. Chạy lệnh: git add file2
+file1: 
+- vùng: repository
+- commit: ”init project”
+- branch: feat/feature-a
+file2:
+- vùng: stage
+- branch: feat/feature-a
+file3:
+- vùng: working dir
+- branch: feat/feature-a
+---
+h. Chạy lệnh: git commit -m”feat: add file2”
+file1: 
+- vùng: repository
+- commit: ”init project”
+- branch: feat/feature-a
+file2:
+- vùng: repository
+- commit: "feat: add file2"
+- branch: feat/feature-a
+file3:
+- vùng: working dir
+- branch: feat/feature-a
+---
+i. Chạy lệnh: git add file3
+file1: 
+- vùng: repository
+- commit: ”init project”
+- branch: feat/feature-a
+file2:
+- vùng: repository
+- commit: "feat: add file2"
+- branch: feat/feature-a
+file3:
+- vùng: stage
+- branch: feat/feature-a
+---
+j. Chạy lệnh: git commit -m ”feat: add file3”
+file1: 
+- vùng: repository
+- commit: ”init project”
+- branch: feat/feature-a
+file2:
+- vùng: repository
+- commit: "feat: add file2"
+- branch: feat/feature-a
+file3:
+- vùng: repository
+- commit: ”feat: add file3”
+- branch: feat/feature-a
+---
+k. Chạy lệnh: git checkout -b feat/feature-B
+file1: 
+- vùng: repository
+- commit: ”init project”
+- branch: feat/feature-b
+file2:
+- vùng: repository
+- commit: "feat: add file2"
+- branch: feat/feature-b
+file3:
+- vùng: repository
+- commit: ”feat: add file3”
+- branch: feat/feature-b
+---
+
+l. Chạy lệnh: git reset HEAD~2
+file1: 
+- vùng: repository
+- commit: ”init project”
+- branch: feat/feature-b
+file2:
+- vùng: working dir
+- branch: feat/feature-b
+file3:
+- vùng: working dir
+- branch: feat/feature-b
+---
+m. Chạy lệnh: git stash
+file1: 
+- vùng: repository
+- commit: ”init project”
+- branch: feat/feature-b
+file2:
+- vùng: stash
+- branch: feat/feature-b
+file3:
+- vùng: stash
+- branch: feat/feature-b
+---
+n. Chạy lệnh: git checkout main
+file1: 
+- vùng: repository
+- commit: ”init project”
+- branch: main
+file2:
+- vùng: stash
+- branch: main
+file3:
+- vùng: stash
+- branch: main
+---
+o. Chạy lệnh: git stash pop
+file1: 
+- vùng: repository
+- commit: ”init project”
+- branch: main
+file2:
+- vùng: working dir
+- branch: main
+file3:
+- vùng: working dir
+- branch: main
