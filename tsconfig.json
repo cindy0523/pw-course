@@ -1,7 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "target": "ES2022",
     "module": "CommonJS",
-    "strict": true
-  }
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  },
+  "include": ["tests/**/*.ts", "playwright.config.ts"]
 }
