@@ -14,7 +14,6 @@ test.describe("Post", () => {
     let xpathNameSuccessMsg ="//p[text()='Tag added.']"
     const userName = "k13-nhu";
     const password = "jOzeymSdcu(POP)hritcC7eh";
-    const tagNameLesson = "lesson tag";
     const tagNameUser = "tag Thu";
 ;
     test.beforeEach(async ({ page }) => {
@@ -23,6 +22,7 @@ test.describe("Post", () => {
             await page.fill(xpathUserName, userName);
             await page.fill(xpathPassword, password);
             await page.click(xpathLoginButton);
+            await page.waitForLoadState("load");
             await page.click(xpathPostTab);
             await page.click(xpathTagsSubTab);
         });
@@ -36,12 +36,11 @@ test.describe("Post", () => {
         test.step("Click on 'Add Tag' button", async () => {
             await page.click(xpathAddTagButton);
 
-            //Verify error message: "A name is required for this term."
             await expect(page.locator(xpathEmptyErrorMessage)).toBeVisible();
         });
 
         test.step("Điền thông tin tag: name = 'lesson tag', click button 'Add New Tag'", async () => {
-            await page.fill(xpathNameInputField, tagNameLesson);
+            await page.fill(xpathNameInputField, "lesson tag");
             await page.click(xpathAddTagButton);
 
             await expect(page.locator(xpathNameErrorMsg)).toBeVisible();
