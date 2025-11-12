@@ -22,14 +22,14 @@ test.describe("Post", () => {
             await page.fill(xpathUserName, userName);
             await page.fill(xpathPassword, password);
             await page.click(xpathLoginButton);
-            await page.waitForLoadState("load");
+            await page.waitForLoadState("domcontentloaded");
             await page.click(xpathPostTab);
             await page.click(xpathTagsSubTab);
         });
     });
 
     test.afterEach(async ({ page }) => {
-        page.close();
+        await page.hover()
     });
 
     test("@POST_TAG_001 - Tag - add failed tag", async ({ page }) => {
@@ -48,12 +48,16 @@ test.describe("Post", () => {
     });
 
     test("@POST_TAG_002 - Tag - add success tag", async ({ page }) => {
-        test.step('"Điền thông tin tag: name = "tag {name}", Click button "Add New Tag"', async () => {
-            await page.click(xpathNameInputField);
+        test.step('"Điền thông tin tag: name = "tag name", Click button "Add New Tag"', async () => {
             await page.fill(xpathNameInputField, tagNameUser);
             await page.click(xpathAddTagButton);
 
             await expect(page.locator(xpathNameSuccessMsg)).toBeVisible();
+            await expect(page.locator("//a[text()='tag 1']")).toHaveValue(tagNameUser);
         });
+
+        test.step('Điền thông tin tag: name = "tag {name} 02", slug = "tag-${name}-02"', async () => {
+            await page.
+        })
     });
 });
