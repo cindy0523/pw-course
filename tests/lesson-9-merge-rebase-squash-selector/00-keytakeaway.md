@@ -52,3 +52,6 @@ còn commit của feature/A sẽ là latest
 - Git squash là gộp nhiều commit lại thành 1 commit duy nhất
 - Cũng để giữ cho lịch sự commit gọn gàng
 
+**Lời khuyên:**
+- Squash chỉ nên làm 1 lần duy nhất.
+- Không rebase cùng vùng commit 2 lần liên tục.
