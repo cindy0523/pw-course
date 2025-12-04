@@ -46,7 +46,7 @@ test.describe("Media", () => {
     test('@MEDIA_FILES_001 - Media - upload file success', async ({ page }) => {
         await test.step('Thực hiện upload file', async () => {
             await page.click(xpathAddMediaButton);
-            await page.setInputFiles(xpathInputFile, "pwcourse/tests/lesson-8-pw-describe-hooks/thu.txt");
+                await page.setInputFiles(xpathInputFile, "tests/lesson-8-pw-describe-hooks/thu.txt");
         });
 
         await test.step("F5 trang", async () => {
