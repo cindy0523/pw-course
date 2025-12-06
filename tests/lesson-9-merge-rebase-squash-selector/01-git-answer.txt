@@ -1,0 +1,3 @@
+a. Giải thích câu lệnh git rebase main, git merge feature/A
+b. Giải thích các merge strategy: fast-forward, three way merge. 
+Khi nào thì các strategy này xảy ra?
