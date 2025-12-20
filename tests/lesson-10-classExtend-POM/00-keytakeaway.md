@@ -84,3 +84,32 @@ Trong POM có 2 keyword là "export" và "import"
 | await expect(elem).toHaveText('');      | Kiểm tra phần tử có text hay ko      |
 | await expect(elem).toHaveValue('')      | Kiểm tra input có chứa giá trị hay ko|
 | await expect(elem).toHaveValues([])     | Kiểm tra select có select            |
+
+####  Sự khác biệt giữa Selector và Locator:
+**1. Selector:**
+Selector = chuỗi để chỉ điểm element trong DOM
+Nó là string, mô tả cách tìm element
+**Đặc điểm:**
+- chỉ là text, không có hành vi (click, fill, check, ...)
+- Selector = địa chỉ của element
+
+**2. Locator:**
+Locator = object mà Playwright dùng để làm việc với element
+--> Locator = selector + logic xử lí của PW
+
+Ví dụ:
+```
+const usernameInput = page.locator('#username');
+```
+
+**Đặc điểm:**
+- Là object, có thể gọi hành động
+```
+await usernameInput.fill('abc');
+await usernameInput.click();
+await usernameInput.isVisible();
+```
+- Tự auto wait
+- An toàn hơn khi UI thay đổi, load chậm
+
+--> Locator = “tay nắm” để thao tác với element
