@@ -37,7 +37,7 @@ test('TC4: Personal Note', async ({ page }) => {
             content: "Chip máy tính lượng tử mới có khả năng xử lý gấp hàng nghìn lần so với chip truyền thống."
         },
         {
-            title: "Khám phá hành tinh giống Trái Đấ",
+            title: "Khám phá hành tinh giống Trái Đất",
             content: "Các nhà thiên văn phát hiện một hành tinh có khí quyển tương đồng với Trái Đất."
         },
         {

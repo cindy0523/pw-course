@@ -5,15 +5,15 @@ export class MaterialBasePage {
     protected page: Page;
     protected xpathRegisterPage: Locator;
     protected xpathProductPage: Locator;
-    protected cssTodoPage: Locator;
-    protected personalNote: Locator;
+    protected xpathTodoPage: Locator;
+    protected xpathpersonalNote: Locator;
 
     constructor(page: Page) {
         this.page = page;
         this.xpathRegisterPage = page.locator("//a[text()='Bài học 1: Register Page (có đủ các element)']");
         this.xpathProductPage = page.locator("//a[text()='Bài học 2: Product page']");
-        this.cssTodoPage = page.locator('a[href*="todo"]');
-        this.personalNote = page.locator("//a[text()='Bài học 4: Personal notes']");
+        this.xpathTodoPage = page.locator("//a[text()='Bài học 3: Todo page']");
+        this.xpathpersonalNote = page.locator("//a[text()='Bài học 4: Personal notes']");
     };
 
     async openMaterialPage() {
@@ -29,10 +29,10 @@ export class MaterialBasePage {
                 await this.xpathProductPage.click();
                 break;
             case 'todo':
-                await this.cssTodoPage.click();
+                await this.xpathTodoPage.click();
                 break;
             case 'personalNote':
-                await this.personalNote.click();
+                await this.xpathpersonalNote.click();
                 break;
             default:
                 throw new Error(`${pageName} page is not supported.`);
@@ -104,3 +104,59 @@ export class ProductPage extends MaterialBasePage {
     };
 };
 
+//To do page
+export class ToDoPage extends MaterialBasePage {
+    protected xpathInputTask: Locator;
+    protected xpathAddTaskBtn: Locator;
+
+    constructor(page: Page) {
+        super(page);
+        this.xpathInputTask = page.locator("//input[@id='new-task']");
+        this.xpathAddTaskBtn = page.locator("//button[@id='add-task']");
+    };
+
+    async addToDoItem(item: number) {
+        for (let i = 0; i <= item; i++) {
+            await this.xpathInputTask.fill(`Todo ${i + 1}`);
+            await this.xpathAddTaskBtn.click();
+        };
+    };
+
+    async deleteOddTodo(num: number) {
+        for (let n = 1; n <= num; n += 2) {
+            this.page.once('dialog', async dialog => {
+                await dialog.accept();
+            });
+            await this.page.locator(`//button[@id='todo-${n}-delete']`).click();
+        };
+    };
+};
+
+// Personal Note
+export class PersonalNote extends MaterialBasePage {
+    protected xpathTitleInput: Locator;
+    protected xpathContentInput: Locator;
+    protected xpathAddNoteBtn: Locator;
+    protected xpathSearchInput: Locator;
+
+    constructor(page: Page) {
+        super(page);
+        this.xpathTitleInput = page.locator("//input[@id='note-title']");
+        this.xpathContentInput = page.locator("//textarea[@id='note-content']");
+        this.xpathAddNoteBtn = page.locator("//button[@id='add-note']");
+        this.xpathSearchInput = page.locator("//input[@id='search']");
+    };
+
+    async addTitle(title: string) {
+        await this.xpathTitleInput.fill(title);
+    };
+
+    async addContent(content: string) {
+        await this.xpathContentInput.fill(content);
+        await this.xpathAddNoteBtn.click();
+    };
+
+    async search(text: string) {
+        await this.xpathSearchInput.fill(text);
+    };
+};

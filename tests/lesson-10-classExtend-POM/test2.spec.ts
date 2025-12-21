@@ -21,7 +21,7 @@ test("Add product to cart successfully", async ({ page }) => {
     await productPage.addProduct3(1);
 
     //Verify
-    const row = page.locator("//table//tbody//tr");
-
-    await expect(row).toContainText
+    await expect(page.locator("//table//tbody//tr[td[contains(text(), 'Product 1')]]")).toContainText("2");
+    await expect(page.locator("//table//tbody//tr[td[contains(text(), 'Product 2')]]")).toContainText("3");
+    await expect(page.locator("//table//tbody//tr[td[contains(text(), 'Product 3')]]")).toContainText("1");
 });
