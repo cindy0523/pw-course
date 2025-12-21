@@ -66,12 +66,12 @@ export class RegisterPage extends MaterialBasePage {
     async checkGender(gender: string) {
         if (gender === 'male') {
             await this.xpathGenderMale.check();
-        } 
+        }
         else if (gender === 'female') {
             await this.xpathGenderFemale.check();
         }
         else {
-            throw new Error (`${gender} gender is not supported.`)
+            throw new Error(`${gender} gender is not supported.`)
         };
     };
 
@@ -79,3 +79,28 @@ export class RegisterPage extends MaterialBasePage {
         this.page.locator("//button[text()='Register']").click();
     };
 };
+
+//Product page
+export class ProductPage extends MaterialBasePage {
+    protected xpathAddProduct1: Locator;
+    protected xpathAddProduct2: Locator;
+    protected xpathAddProduct3: Locator;
+
+    constructor(page: Page) {
+        super(page);
+        this.xpathAddProduct1 = page.locator("//button[@data-product-id=1]");
+        this.xpathAddProduct2 = page.locator("//button[@data-product-id=2]");
+        this.xpathAddProduct3 = page.locator("//button[@data-product-id=3]");
+    };
+
+    async addProduct1(total1: number) {
+        await this.xpathAddProduct1.click({ clickCount: total1 });
+    };
+    async addProduct2(total2: number) {
+        await this.xpathAddProduct2.click({ clickCount: total2 });
+    };
+    async addProduct3(total3: number) {
+        await this.xpathAddProduct3.click({ clickCount: total3 });
+    };
+};
+
