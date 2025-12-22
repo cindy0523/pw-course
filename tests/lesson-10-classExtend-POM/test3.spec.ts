@@ -1,5 +1,5 @@
 import {test, expect} from '@playwright/test';
-import { ToDoPage } from './01-pom';
+import { ToDoPage } from './pages/todo-page';
 
 test("Add 10 item and delete odd number item", async ({ page }) => {
     const toDoPage = new ToDoPage (page);

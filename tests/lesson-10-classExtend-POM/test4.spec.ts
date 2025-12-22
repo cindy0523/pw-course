@@ -1,5 +1,5 @@
 import {test, expect} from '@playwright/test';
-import { PersonalNote } from './01-pom';
+import { PersonalNote } from './pages/personal-note';
 
 test("Add 5 personal notes", async ({ page }) => {
     const personalNotePage = new PersonalNote (page);
@@ -25,4 +25,4 @@ test("Add 5 personal notes", async ({ page }) => {
     //search and verify
     await personalNotePage.search('Chip lượng tử thế hệ mới');
     await expect(page.locator("//li//div//strong")).toContainText("Chip lượng tử thế hệ mới");
-})
+});
