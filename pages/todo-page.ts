@@ -3,8 +3,8 @@ import { MaterialBasePage } from './base-page';
 
 //To do page
 export class ToDoPage extends MaterialBasePage {
-    protected xpathInputTask: Locator;
-    protected xpathAddTaskBtn: Locator;
+    private xpathInputTask: Locator;
+    private xpathAddTaskBtn: Locator;
 
     constructor(page: Page) {
         super(page);

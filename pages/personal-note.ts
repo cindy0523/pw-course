@@ -3,10 +3,10 @@ import { MaterialBasePage } from './base-page';
 
 // Personal Note
 export class PersonalNote extends MaterialBasePage {
-    protected xpathTitleInput: Locator;
-    protected xpathContentInput: Locator;
-    protected xpathAddNoteBtn: Locator;
-    protected xpathSearchInput: Locator;
+    private xpathTitleInput: Locator;
+    private xpathContentInput: Locator;
+    private xpathAddNoteBtn: Locator;
+    private xpathSearchInput: Locator;
 
     constructor(page: Page) {
         super(page);

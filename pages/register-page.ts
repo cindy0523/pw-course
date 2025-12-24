@@ -3,10 +3,10 @@ import { MaterialBasePage } from './base-page';
 
 //Register page
 export class RegisterPage extends MaterialBasePage {
-    xpathUserName: Locator;
-    xpathEmail: Locator;
-    xpathGenderMale: Locator;
-    xpathGenderFemale: Locator;
+    private xpathUserName: Locator;
+    private xpathEmail: Locator;
+    private xpathGenderMale: Locator;
+    private xpathGenderFemale: Locator;
 
     constructor(page: Page) {
         super(page);

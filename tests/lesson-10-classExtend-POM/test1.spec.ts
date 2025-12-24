@@ -6,7 +6,7 @@ b. Kiểm tra nội dung đã đăng kí ở bảng là đúng
 */
 
 import { test, expect } from '@playwright/test';
-import { RegisterPage } from './pages/register-page';
+import { RegisterPage } from '../../pages/register-page';
 
 test ("Register successfully", async ({ page }) => {
     const registerPage = new RegisterPage(page);

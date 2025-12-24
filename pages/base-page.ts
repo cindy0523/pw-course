@@ -3,10 +3,10 @@ import { Locator, Page } from "@playwright/test";
 // Base Page
 export class MaterialBasePage {
     protected page: Page;
-    protected xpathRegisterPage: Locator;
-    protected xpathProductPage: Locator;
-    protected xpathTodoPage: Locator;
-    protected xpathpersonalNote: Locator;
+    private xpathRegisterPage: Locator;
+    private xpathProductPage: Locator;
+    private xpathTodoPage: Locator;
+    private xpathpersonalNote: Locator;
 
     constructor(page: Page) {
         this.page = page;

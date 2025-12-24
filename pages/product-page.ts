@@ -3,9 +3,9 @@ import { MaterialBasePage } from './base-page';
 
 //Product page
 export class ProductPage extends MaterialBasePage {
-    protected xpathAddProduct1: Locator;
-    protected xpathAddProduct2: Locator;
-    protected xpathAddProduct3: Locator;
+    private xpathAddProduct1: Locator;
+    private xpathAddProduct2: Locator;
+    private xpathAddProduct3: Locator;
 
     constructor(page: Page) {
         super(page);
