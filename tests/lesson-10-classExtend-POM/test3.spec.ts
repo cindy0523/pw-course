@@ -6,7 +6,7 @@ xóa các Todo có số lẻ
 */
 
 import { test, expect } from '@playwright/test';
-import { ToDoPage } from '../../pages/todo-page';
+import { ToDoPage } from '../../pages/to-do.page';
 
 test("Add 10 item and delete odd number item", async ({ page }) => {
     const toDoPage = new ToDoPage(page);

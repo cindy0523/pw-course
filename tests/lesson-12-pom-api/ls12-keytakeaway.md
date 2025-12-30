@@ -1,25 +1,26 @@
-### Design pattern
-- Design pattern = Cách giải quyết 1 vấn đề hay gặp trong code, đã được nhiều người dùng và chứng minh là hiệu quả
-- Nó không phải là code, mà là các ý tưởng/ cách tổ chức code 
-- Nó là concept, không phải thư viện, framework
-
-**Vì sao cần design pattern?**
-1. Không phải nghĩ lại từ đầu
-2. Dễ nói chuyện trong team
-3. Code dễ maintain, scale
-4. Tập trung vào What, thay vì How
-
----
 ### POM API
 **1. Mục tiêu:**
 - File test gọn gàng hơn
 - Ko chứa các setup (baseURL, url của các API)
 
-**2. Cách tổ chức POM API:**
+**2. Cách tổ chức POM API (Best practice):**
 - Có fixture: request
 - Có thuộc tính: baseUrl
-- Define các endpoint như các XPath: tùy theo dự án lớn/ nhỏ, tùy theo convention của công ty
 - POM không có 1 tiêu chuẩn nào cả, mình sẽ apply theo convention của công ty
+- Không assert trong POM
+
+**Best practice:**
+- BaseApi (dễ change env, tránh duplicate baseUrl, tất cả Api kế thừa)
+- 1 class = 1 API resource (parse JSON là optional tùy context)
+Ví dụ:
+  - AuthApi (luôn tách riêng vì nó là cross-domain)
+  - ArticleApi
+  - EmployeeApi
+  - AttendanceApi
+
+- 1 action method trong class = 1 endpoint (URL path + HTTP method)
+- Token/Headers: truyền từ test hoặc dùng fixture
+- đặt tên file POM API: <name>.api.ts
 
 **3. Access modifer:**
 **Private:**
@@ -29,10 +30,10 @@
 - Helper method nội bộ
 
 **Public:**
-- API action methods
+- method call API
 
 **Protected:**
-- Có base API class
+- baseUrl, request trong Base API class
 - Nhiều API POM extends từ base
 
 ---
@@ -90,7 +91,7 @@ export class PomManager {
 #### 3. Return POM from another POM:
 - Các method của Page Object này trả về Page Object khác
 - Thường áp dụng cho các dự án testcase thông luồng phức tạp, cần di chuyển liên tục giữa các trang
-- **Ví dụ:** dự án Ecommerce
+- **Ví dụ: dự án Ecommerce**
 Login > đến trang Sản phẩm > select Sản Phẩm > đến trang Thanh toán > đến trang Xác nhận
 - Nhược điểm: khó maintain, việc di chuyển trang viết hết trong method, khiến cho mình khó debug
 
@@ -143,6 +144,9 @@ Khi một hàm trả về nhiều kiểu giá trị, ta có thể “ép kiểu�
 const myPage = await basePage.gotoPage("Product page");
 productPage = myPage as ProductPage;
 ```
+
+**3. Parse JSON:**
+- Parse JSON là chuyển response body về kiểu dữ liệu JSON để dùng trong code
 
 **Note:**
 - Đa số dự án nhỏ sẽ sử dụng POM extends

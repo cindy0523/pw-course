@@ -1,5 +1,5 @@
 import { Locator, Page } from "@playwright/test";
-import { MaterialBasePage } from './base-page';
+import { MaterialBasePage } from './base.page';
 
 //To do page
 export class ToDoPage extends MaterialBasePage {

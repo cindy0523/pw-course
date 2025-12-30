@@ -1,3 +1,14 @@
+### Design pattern
+- Design pattern = Cách giải quyết 1 vấn đề hay gặp trong code, đã được nhiều người dùng và chứng minh là hiệu quả
+- Nó không phải là code, mà là các ý tưởng/ cách tổ chức code 
+- Nó là concept, không phải thư viện, framework
+
+**Vì sao cần design pattern?**
+1. Không phải nghĩ lại từ đầu
+2. Dễ nói chuyện trong team
+3. Code dễ maintain, scale
+4. Tập trung vào What, thay vì How
+
 ## Class extend
 - Class extend thường dùng để nói về kế thừa (inheritance) trong lập trình hướng đối tượng. Nó cho phép 1 class con kế thừa thuộc tính và hành vi Class cha 
 

@@ -8,7 +8,7 @@ c. Kiểm tra tổng tiền tại giỏ hàng đúng.
 */
 
 import { test, expect } from '@playwright/test';
-import { ProductPage } from '../../pages/product-page';
+import { ProductPage } from '../../pages/product.page';
 
 test("Add product to cart successfully", async ({ page }) => {
     const productPage = new ProductPage(page);

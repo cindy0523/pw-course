@@ -1,5 +1,4 @@
 import { test, expect } from "@playwright/test";
-import { ConduitApi } from "../../api/conduit-api-page";
 
 const baseUrl = "https://conduit-api.bondaracademy.com/api";
 let token: string;
@@ -27,30 +26,44 @@ test.describe("Exercise 11", async () => {
     });
 
     test("Test 2: Login and create an article", async ({ request }) => {
-        let conduitApi = new ConduitApi(request, baseUrl);
-        // Login
         await test.step("Login", async () => {
-            const { response, resBody } = await conduitApi.login(email, password);
-
+            const response = await request.post(`${baseUrl}/users/login`, {
+                data: {
+                    "user": {
+                        "email": `${email}`,
+                        "password": `${password}`
+                    }
+                }
+            });
             //Verify status code
             expect(response.status()).toBe(200);
+
             //retrieve token
-            token = await resBody.user.token;
+            const responseBody = await response.json();
+            token = await responseBody.user.token;
         });
 
         await test.step("Create an article", async () => {
-            const title = "API in Playwright testing 890";
-            const desc = "How to use Playwright to create article 890";
-            const body = "Article description sample 890";
-            const tagList = ["Playwright Viet , pw, pw-k10 890"];
-
-            const { response, resBody } = await conduitApi.
-                createArticle(token, title, desc, body, tagList);
-
+            const response = await request.post(`${baseUrl}/articles`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                data: {
+                    "article": {
+                        "title": "API in Playwright testing 890",
+                        "description": "How to use Playwright to create article 890",
+                        "body": "Article description sample 890",
+                        "tagList": [
+                            "Playwright Viet , pw, pw-k10 890"
+                        ]
+                    }
+                }
+            });
             // Verify status code
             expect(response.status()).toBe(201);
             //Retrieve slug
-            slug = resBody.article.slug;
+            const Body2 = await response.json();
+            slug = Body2.article.slug;
         });
     });
 
@@ -68,6 +81,7 @@ test.describe("Exercise 11", async () => {
             });
             //Verify status code
             expect(response.status()).toBe(200);
+
             //Get response
             const Body3 = await response.json();
             cmtTotal.push(Body3.comment.id);
