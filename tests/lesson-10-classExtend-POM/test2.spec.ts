@@ -11,17 +11,28 @@ import { test, expect } from '@playwright/test';
 import { ProductPage } from '../../pages/product-page';
 
 test("Add product to cart successfully", async ({ page }) => {
-    const productPage = new ProductPage (page);
+    const productPage = new ProductPage(page);
 
-    //Step
-    await productPage.openMaterialPage();
-    await productPage.gotoPage('product');
-    await productPage.addProduct1(2);
-    await productPage.addProduct2(3);
-    await productPage.addProduct3(1);
+    await test.step("Truy cập trang Material", async () => {
+        await productPage.openMaterialPage();
+    });
+    await test.step("Thêm sản phẩm vào giỏ hàng", async () => {
+        await productPage.gotoPage('product');
+        await productPage.addProduct1(2);
+        await productPage.addProduct2(3);
+        await productPage.addProduct3(1);
+    });
 
-    //Verify
-    await expect(page.locator("//table//tbody//tr[td[contains(text(), 'Product 1')]]")).toContainText("2");
-    await expect(page.locator("//table//tbody//tr[td[contains(text(), 'Product 2')]]")).toContainText("3");
-    await expect(page.locator("//table//tbody//tr[td[contains(text(), 'Product 3')]]")).toContainText("1");
+    await test.step("Kiểm tra số lượng sản phẩm và số tiền trong giỏ hàng", async () => {
+        const actualData = await productPage.getTableData();
+        //Kiểm tra số lượng sản phẩm
+        await expect(actualData.product1Row).toContainText("2");
+        await expect(actualData.product2Row).toContainText("3");
+        await expect(actualData.product3Row).toContainText("1");
+
+        //Kiểm tra số tiền
+        await expect(actualData.product1Row).toContainText("$20.00");
+        await expect(actualData.product2Row).toContainText("$60.00");
+        await expect(actualData.product3Row).toContainText("$30.00");
+    });
 });

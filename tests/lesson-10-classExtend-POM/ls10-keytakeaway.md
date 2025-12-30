@@ -48,42 +48,67 @@ class ConCho extends DongVat {
 Giúp cho code chuẩn, dễ maintain, tránh việc mỗi người code 1 kiểu, hợp team work và apply đc cho nhiều dự án khác nhau
 
 **Lưu ý:**
-- ko có chuẩn chung nào cho POM
+- không có chuẩn chung nào cho POM
 - Dựa trên framework, ngôn ngữ, author và tình hình của công ty/project/product để thiết kế cái design pattern như thế nào, chỉ có cái phù hợp cho cái project đó thôi
 
 **4. Viết POM như thế nào?**
-Core concept:
+**Core concept:**
 - 1 page là 1 class
 - Có property (thuộc tính) và method (phương thức) riêng
   - Property: đại diện cho các phần tử trên trang
   - Method: đại diện cho hành động của user
-- Property đã xuất hiện ở POM cha rồi thì ko cần định nghĩa lại ở POM con nữa
+- Property đã xuất hiện ở POM cha rồi thì không cần định nghĩa lại ở POM con nữa
 
 Trong POM có 2 keyword là "export" và "import"
 - export mình sẽ để ở file POM
 - import mình sẽ để ở những file mà sử dụng lại cái POM đó
 
-## Assertion
-- Assertion là kiểm tra - kiểm tra xem một giá trị có đúng với mong muốn hay ko
+**Assert:**
+- File POM không được chứa assert, chỉ assert ở file test
+- File Test không nên lộ Locator, dù là step hay assert (Best practice)
 
-| Async Matcher                           | Ý nghĩa                             |
-|-----------------------------------------|-------------------------------------|
-| await expect(elem).toBeAttached();      | Kiểm tra phần tử đc gắn vào DOM     |
-| await expect(elem).toBeChecked();       | Kiểm tra phần tử đc check.          |
-| await expect(elem).toBeEditable();      | Kiểm tra phần tử có thể sửa đc (ô input) |
-| await expect(elem).toBeEmpty();         | Kiểm tra phần tử rỗng (phần tử warning, error) |
-| await expect(elem).toBeEnabled();       | Kiểm tra phần tử có enable ko (button hoặc input) |
-| await expect(elem).toBeFocused();       | Kiểm tra phần tử có focus hay ko (input) |
-| await expect(elem).toBeHidden();        | Kiểm tra phần tử có bị ẩn khỏi web hay ko (text thông báo)|
-| await expect(elem).toBeInViewport()     | Kiểm tra phần tử có nằm trong viewport hay ko. |
-| await expect(elem).toBeVisible();       | Kiểm tra phần tử có visible (hiển thị) hay ko |
-| await expect(elem).toContainText("abc");| Kiểm tra phần tử có chứa text hay ko |
-| await expect(elem).toHaveAttribute("href");| Kiểm tra phần tử có thuộc tính hay ko|
-| await expect(elem).toHaveClass("class-name");| Kiểm tra phần tử có class hay ko|
-| await expect(elem).toHaveId("id")       | Kiểm tra phần tử có id hay ko        |
-| await expect(elem).toHaveText('');      | Kiểm tra phần tử có text hay ko      |
-| await expect(elem).toHaveValue('')      | Kiểm tra input có chứa giá trị hay ko|
-| await expect(elem).toHaveValues([])     | Kiểm tra select có select            |
+**Access modifier:**
+**1. Private**
+- Locator
+- Helper nội bộ:
+  - waitForPageLoaded
+  - scrollIntoViewIfNeeded
+  - retryClick
+
+**2. Public:**
+- Method (page actions)
+- Getter/ state method (phục vụ cho việc assert), những method:
+  - getText()
+  - isVisible()
+  - isDisabled()
+  - getErrorMessage()
+
+**3. Protected:**
+- Common action của Base Page (khi có kế thừa)
+
+---
+
+## Assertion
+- Assertion là kiểm tra - kiểm tra xem một giá trị có đúng với mong muốn hay không
+
+| Async Matcher                                | Ý nghĩa                                          |
+|----------------------------------------------|--------------------------------------------------|
+| await expect(elem).toBeAttached();           | Kiểm tra phần tử đc gắn vào DOM                  |
+| await expect(elem).toBeChecked();            | Kiểm tra phần tử đc check.                       |
+| await expect(elem).toBeEditable();           | Kiểm tra phần tử có thể sửa đc (ô input)         |
+| await expect(elem).toBeEmpty();              | Kiểm tra phần tử rỗng (phần tử warning, error)   |
+| await expect(elem).toBeEnabled();            | Kiểm tra phần tử có enable không (button hoặc input)|
+| await expect(elem).toBeFocused();            | Kiểm tra phần tử có focus hay không (input)         |
+| await expect(elem).toBeHidden();             | Kiểm tra phần tử có bị ẩn khỏi web hay không     |
+| await expect(elem).toBeInViewport()          | Kiểm tra phần tử có nằm trong viewport hay không |
+| await expect(elem).toBeVisible();            | Kiểm tra phần tử có visible (hiển thị) hay không |
+| await expect(elem).toContainText("abc");     | Kiểm tra phần tử có chứa text hay không          |
+| await expect(elem).toHaveAttribute("href");  | Kiểm tra phần tử có thuộc tính hay không         |
+| await expect(elem).toHaveClass("class-name");| Kiểm tra phần tử có class hay không              |
+| await expect(elem).toHaveId("id")            | Kiểm tra phần tử có id hay không                 |
+| await expect(elem).toHaveText('');           | Kiểm tra phần tử có text hay không               |
+| await expect(elem).toHaveValue('')           | Kiểm tra input có chứa giá trị hay không         |
+| await expect(elem).toHaveValues([])          | Kiểm tra select có select                        |
 
 ####  Sự khác biệt giữa Selector và Locator:
 **1. Selector:**

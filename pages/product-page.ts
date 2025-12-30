@@ -23,4 +23,11 @@ export class ProductPage extends MaterialBasePage {
     async addProduct3(total3: number) {
         await this.xpathAddProduct3.click({ clickCount: total3 });
     };
+    async getTableData() {
+        return {
+            product1Row: this.page.locator("//tbody//tr[td[contains(text(), 'Product 1')]]"),
+            product2Row: this.page.locator("//tbody//tr[td[contains(text(), 'Product 2')]]"),
+            product3Row: this.page.locator("//tbody//tr[td[contains(text(), 'Product 3')]]"),
+        }
+    }
 };

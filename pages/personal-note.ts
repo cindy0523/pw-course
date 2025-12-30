@@ -28,4 +28,8 @@ export class PersonalNote extends MaterialBasePage {
     async search(text: string) {
         await this.xpathSearchInput.fill(text);
     };
+
+    getActualNoteList() {
+        return this.page.locator("//ul//li//div//strong");
+    };
 };

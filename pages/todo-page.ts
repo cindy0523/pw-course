@@ -27,4 +27,11 @@ export class ToDoPage extends MaterialBasePage {
             await this.page.locator(`//button[@id='todo-${n}-delete']`).click();
         };
     };
+
+    async getTodoData() {
+        return {
+            todo21: this.page.locator("//li[span='Todo 21']"),
+            todo90: this.page.locator("//li[span='Todo 90']")
+        }
+    }
 };

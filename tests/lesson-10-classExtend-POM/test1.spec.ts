@@ -8,19 +8,28 @@ b. Kiểm tra nội dung đã đăng kí ở bảng là đúng
 import { test, expect } from '@playwright/test';
 import { RegisterPage } from '../../pages/register-page';
 
-test ("Register successfully", async ({ page }) => {
+test("Register successfully", async ({ page }) => {
     const registerPage = new RegisterPage(page);
 
-    await registerPage.openMaterialPage();
-    await registerPage.gotoPage('register');
-    await registerPage.fillUsername('thucute');
-    await registerPage.fillEmail('thucute@mailsac.com');
-    await registerPage.checkGender('female');
-    await registerPage.clickRegister();
+    await test.step("Truy cập trang Material", async () => {
+        await registerPage.openMaterialPage();
+    });
 
-    const row = page.locator("//table//tbody//tr");
+    await test.step("Nhập đầy đủ thông tin", async () => {
+        // Fill info
+        await registerPage.gotoPage('register');
+        await registerPage.fillUsername('thucute');
+        await registerPage.fillEmail('thucute@mailsac.com');
+        await registerPage.checkGender('female');
+        //Click "Register" button
+        await registerPage.clickRegister();
+    });
 
-    await expect(row).toContainText('thucute');
-    await expect(row).toContainText('thucute@mailsac.com');
-    await expect(row).toContainText('female');
+    await test.step("Verify thông tin nhập vào đúng", async () => {
+        const actualInfo = await registerPage.getInfoFromTable();
+
+        await expect(actualInfo.username).toContainText('thucute');
+        await expect(actualInfo.email).toContainText('thucute@mailsac.com');
+        await expect(actualInfo.infomation).toContainText('female');
+    });
 });

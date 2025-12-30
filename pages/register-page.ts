@@ -37,6 +37,15 @@ export class RegisterPage extends MaterialBasePage {
     };
 
     async clickRegister() {
-        this.page.locator("//button[text()='Register']").click();
+        await this.page.locator("//button[text()='Register']").click();
+    };
+
+    async getInfoFromTable() {
+        // Retrieve actual data in the Table
+        return {
+            username: this.page.locator("//tbody//tr//td[2]"),
+            email: this.page.locator("//tbody//tr//td[3]"),
+            infomation: this.page.locator("//tbody//tr//td[4]"),
+        };
     };
 };

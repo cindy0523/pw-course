@@ -28,6 +28,7 @@ test.describe("Exercise 11", async () => {
 
     test("Test 2: Login and create an article", async ({ request }) => {
         let conduitApi = new ConduitApi(request, baseUrl);
+        // Login
         await test.step("Login", async () => {
             const { response, resBody } = await conduitApi.login(email, password);
 
@@ -43,7 +44,8 @@ test.describe("Exercise 11", async () => {
             const body = "Article description sample 890";
             const tagList = ["Playwright Viet , pw, pw-k10 890"];
 
-            const { response, resBody } = await conduitApi.createArticle(token, title, desc, body, tagList);
+            const { response, resBody } = await conduitApi.
+                createArticle(token, title, desc, body, tagList);
 
             // Verify status code
             expect(response.status()).toBe(201);
