@@ -130,7 +130,6 @@ expect(myPage).toBeInstanceOf(ProductPage);
 **2. Ép kiểu:**
 Khi một hàm trả về nhiều kiểu giá trị, ta có thể “ép kiểu” 
 (hay còn gọi là type casting) tới một kiểu giá trị mong muốn.
-
 **Mục đích:** 
 Ép kiểu giúp cụ thể kiểu giá trị của Object, giúp code dễ dàng hơn.
 
