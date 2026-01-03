@@ -1,24 +1,23 @@
 import { test, expect } from "@playwright/test";
 import { ConduitApi } from "../../api/conduit.api";
-import { request } from "http";
 
 const baseUrl = "https://conduit-api.bondaracademy.com/api";
-let email = "thucute@mailsac.com";
-let password = "Test123@";
-let cmtTotal: any[] = [];
+const email = "thucute@mailsac.com";
+const password = "Test123@";
 let slug: string;
+let cmtTotal: any[] = [];
+let deletedCmt: any[] = [];
+
 let title = 'Exercise Lesson 12';
 let desc = 'How to use API to create article';
 let body = 'Hello testing world';
-let tagList = ['Playwright Viet Nam, pw, pw-k11, k11-practice'];
-let token: string;
+let tagList = ['Playwright Viet Nam', 'pw', 'pw-k11, k11-practice'];
 
 test.describe("Exercise 11", () => {
     let conduitApi: ConduitApi;
-    
+
     test.beforeEach(async ({ request }) => {
         conduitApi = new ConduitApi(request, baseUrl);
-        token = await conduitApi.getToken(email, password);
     });
 
     test("Test 1: Sign up successfully", async () => {
@@ -35,47 +34,52 @@ test.describe("Exercise 11", () => {
         });
 
         await test.step("Create an article", async () => {
-            const response = await conduitApi.createArticle(token, title, desc, body, tagList);
+            const response = await conduitApi.createArticle(title, desc, body, tagList);
             const resBody = await response.json();
             // Verify status code
             expect(response.status()).toBe(201);
-            //get slug
+            //Get slug
             slug = resBody.article.slug;
         });
     });
 
     test("Test 3: Add 5 comments in Article", async () => {
-        const response = await conduitApi.createComment(token, slug, 5);
-        //Verify status code
-        expect(response.status()).toBe(200);
+        let cmtTotal: number[] = [];
+        await conduitApi.getToken(email, password);
 
-        //Get response
-        const Body3 = await response.json();
-        cmtTotal.push(Body3.comment.id);
+        for (let i = 0; i < 5; i++) {
+            let bodyCmt = `Comment 0${i}`;
+            const response = await conduitApi.createComment(slug, bodyCmt);
+            const resBody = await response.json();
+            cmtTotal.push(resBody.comment.id);
 
-        //Verify response data: add 5 cmts
+            //Verify status code
+            expect(response.status()).toBe(200);
+        }
+        //verify add 5 cmts
         expect(cmtTotal.length).toBe(5);
+        //Get comment 2 and comment 5
+        deletedCmt = [cmtTotal[1], cmtTotal[4]];
     });
 
     test("Test 4: Delete cmt 2 and cmt 5 successfully", async ({ request }) => {
-        await test.step("Delete cmt 2 and cmt 5", async () => {
-            //Retrieve comment 2 and comment 5
-            const deletedCmt = [cmtTotal[1], cmtTotal[4]];
 
-            for (const id of deletedCmt) {
-                const response = await request.delete(`${baseUrl}/articles/${slug}/comments/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
+        await test.step("Delete cmt 2 and cmt 5", async () => {
+            await conduitApi.getToken(email, password);
+            //Delete cmt
+            for (let id of deletedCmt) {
+                const response = await conduitApi.deleteComment(slug, id);
+
                 //Verify status code
                 expect(response.status()).toBe(200);
             };
         });
     });
 
+
     test("Test 6: Xóa article đã tạo ở test 2", async () => {
-        const response = await conduitApi.deleteArticle(token, slug);
+        await conduitApi.getToken(email, password);
+        const response = await conduitApi.deleteArticle(slug);
         //Verify status code
         expect(response.status()).toBe(204);
     });

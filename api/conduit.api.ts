@@ -3,6 +3,7 @@ import { APIRequestContext } from '@playwright/test';
 export class ConduitApi {
     protected request: APIRequestContext;
     protected baseUrl: string;
+    protected token!: string;
 
     constructor(request: APIRequestContext, baseUrl: string) {
         this.request = request;
@@ -38,11 +39,10 @@ export class ConduitApi {
     async getToken(email: string, password: string) {
         const response = await this.logIn(email, password);
         const resBody = await response.json();
-        return resBody.user.token;
+        this.token = resBody.user.token;
     };
 
     async createArticle(
-        token: string,
         title: string,
         desc: string,
         body: string,
@@ -50,7 +50,7 @@ export class ConduitApi {
     ) {
         const response = this.request.post(`${this.baseUrl}/articles/`, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${this.token}`
             },
             data: {
                 "article": {
@@ -64,35 +64,36 @@ export class ConduitApi {
         return response;
     };
 
-    async deleteArticle(token: string, slug: string) {
+    async deleteArticle(slug: string) {
         const response = this.request.delete(`${this.baseUrl}/articles/${slug}`, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${this.token}`
             }
         });
         return response;
     };
 
-    async createComment(token: string, slug: string) {
+    async createComment(slug: string, bodyCmt: string) {
         const response = await this.request.post(`${this.baseUrl}/articles/${slug}/comments`, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${this.token}`
             },
             data: {
                 "comment": {
-                    "body": `Comment 0`
+                    "body": `${bodyCmt}`
                 }
             }
         });
         return response;
     };
 
-    async deleteComment(token: string, slug: string, id: string) {
+    async deleteComment(slug: string, id: any[]) {
         const response = await this.request.delete(`${this.baseUrl}/articles/${slug}/comments/${id}`, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${this.token}`
             }
         });
         return response;
     };
+
 };
