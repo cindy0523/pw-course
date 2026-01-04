@@ -8,7 +8,7 @@ let slug: string;
 let cmtTotal: any[] = [];
 let deletedCmt: any[] = [];
 
-let title = 'Exercise Lesson 12';
+let title = 'Exercise Lesson 789';
 let desc = 'How to use API to create article';
 let body = 'Hello testing world';
 let tagList = ['Playwright Viet Nam', 'pw', 'pw-k11, k11-practice'];
@@ -34,6 +34,7 @@ test.describe("Exercise 11", () => {
         });
 
         await test.step("Create an article", async () => {
+            await conduitApi.getToken(email, password);
             const response = await conduitApi.createArticle(title, desc, body, tagList);
             const resBody = await response.json();
             // Verify status code
@@ -44,7 +45,6 @@ test.describe("Exercise 11", () => {
     });
 
     test("Test 3: Add 5 comments in Article", async () => {
-        let cmtTotal: number[] = [];
         await conduitApi.getToken(email, password);
 
         for (let i = 0; i < 5; i++) {
@@ -63,7 +63,6 @@ test.describe("Exercise 11", () => {
     });
 
     test("Test 4: Delete cmt 2 and cmt 5 successfully", async ({ request }) => {
-
         await test.step("Delete cmt 2 and cmt 5", async () => {
             await conduitApi.getToken(email, password);
             //Delete cmt
