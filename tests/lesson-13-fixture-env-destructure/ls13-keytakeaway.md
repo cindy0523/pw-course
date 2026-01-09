@@ -199,10 +199,35 @@ testFixture("Dashboard", async ({ dashboard }) => {
 **2. Cách tổ chức fixture (merge fixture)**
 - Khi có nhiều fixture, thì sẽ rất rối và phải import nhiều
 --> để xử lí issue này thì có tính năng merge fixture của Playwright
-**Step:**
-1. Tạo 1 file index.fixture.ts
-Thuật ngữ index là kiểu mình sẽ gộp hết vào file index, chỉ cần import cái file index ra thôi
+- Tạo 1 file index.fixture.ts
+- Thuật ngữ index là kiểu mình sẽ import tất cả những gì liên quan tới file index vào, khi muốn import gì thì chỉ cần export cái file index ra thôi
 
+---
+#### Quản lí biến môi trường (Managing environment variables)
+
+- Mỗi env có data khác nhau, và url cũng khác, thông tin DB khác nhau, để không phải code lại và tách riêng ra thì mình có cách tạo biến env để quản lý
+
+**Ví dụ:**
+- pw-practice-dev.playwrightvn.com (Dev env)
+- pw-practice.playwrightvn.com (Prod env)
+
+**Giải pháp:**
+1. Cài đặt thư viện dotenv:
+Sử dụng câu lệnh "npm install dotenv --save"
+--> nó sẽ tạo cho mình 1 cái thư viện vào trong file playwright.config.ts
+
+2. Vào file playwright.config.ts, mình sẽ import thêm hàm config từ thư viện dotenv mình vừa cài
+```
+import { config } from 'dotenv';
+config();
+console.log(process.env.ENV1);
+```
+**Mục đích:** cái hàm này sẽ giúp mình đọc cái file dotenv ở trong project của mình
+
+3. Vào cấu trúc source code, tạo  1 file tên là ".env"
+--> File .env này sẽ chứa các biến env của mình
+
+4. Tạo file data theo biến môi trường
 
 ---
 #### Kiến thức bổ sung để làm bài: 

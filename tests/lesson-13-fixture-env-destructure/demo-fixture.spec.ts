@@ -1,6 +1,6 @@
-import { testFixture } from "../../fixture/demo-fixture";
+import { test } from "../../fixture/index.fixture";
 
-testFixture("Dashboard", async ({ dashboard }) => {
+test("Dashboard", async ({ dashboard }) => {
     console.log("Click menu Post Page");
     console.log("Verify title");
 });
