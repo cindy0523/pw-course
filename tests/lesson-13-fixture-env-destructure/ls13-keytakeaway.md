@@ -229,6 +229,10 @@ console.log(process.env.ENV1);
 
 4. Tạo file data theo biến môi trường
 
+**Note:**
+- File env thường đi làm nên để trong file gitignore để tránh lộ thông tin quan trọng như password, API key, token, ... (secret)
+- Chỉ nên làm 1 file env example và khi team clone repo về sẽ chỉnh sửa lại
+
 ---
 #### Kiến thức bổ sung để làm bài: 
 
