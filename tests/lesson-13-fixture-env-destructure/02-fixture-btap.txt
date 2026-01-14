@@ -1,0 +1,14 @@
+ user: 'k11-my',
+ password: 'xWo56Nry^hsfk9!MQoTbRUyC'
+ https:pw-practice-dev.playwrightvn.com/wp-admin
+
+ 1. Viết fixture: myTag, login sẵn vào dashboard
+vào Posts > tags > tạo sẵn t1, t2. Sau khi test chạy xong, xóa tag đi. 
+
+ 2. Viết fixture: myApi 
+login sẵn, tạo sẵn 2 article: a1, a2. Sau khi chạy test xong, xóa đi. 
+
+Lấy api trên ConduitApi: https:conduit.bondaracademy.com/
+
+ 3. Tạo và sử dụng file .env để dễ dàng switch giữa 2 môi trường: dev và production
+ 
