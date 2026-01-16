@@ -1,6 +1,6 @@
  user: 'k11-my',
  password: 'xWo56Nry^hsfk9!MQoTbRUyC'
- https:pw-practice-dev.playwrightvn.com/wp-admin
+ https://pw-practice-dev.playwrightvn.com/wp-admin
 
  1. Viết fixture: myTag, login sẵn vào dashboard
 vào Posts > tags > tạo sẵn t1, t2. Sau khi test chạy xong, xóa tag đi. 

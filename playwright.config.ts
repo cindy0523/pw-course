@@ -2,14 +2,14 @@ import { defineConfig, devices } from '@playwright/test';
 import * as dotenv from 'dotenv';
 import path from 'path';
 
+// by default, 'dev' env is selected
 const ENV = process.env.PW_ENV || 'dev';
 
 dotenv.config({
-  path: path.resolve(__dirname, `.env${ENV}`)
+  path: path.resolve(__dirname, `.env.${ENV}`)
 });
 
 export default defineConfig({
-  // define folder chứa TC
   testDir: './tests',
 
   // Run parallel hay không, nếu false thì ko (chạy tuần tự), nếu true thì chạy song song
@@ -32,7 +32,7 @@ export default defineConfig({
   use: {
     headless: false,
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
+    baseURL: process.env.BASE_URL,
 
     // Khi test fail thì retry lần 1, retry fail tiếp thì lưu trace. See https://playwright.dev/docs/trace-viewer
     trace: 'on-first-retry',
