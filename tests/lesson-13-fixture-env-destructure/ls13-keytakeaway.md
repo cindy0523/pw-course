@@ -168,22 +168,25 @@ Playwright cung cấp sẵn 1 số fixture để làm việc
 **Cú pháp tạo Fixture:**
 **- File fixture:**
 ```
-import { Page, test } from "@playwright/test";
+import { test as base } from '@playwright/test';
 
-const testFixture = test.extend<{ dashboard: Page }>({
-    dashboard: async ({ page }, use) => {
-        //beforeEach
-        console.log("login");
+type Fixtures = {
+  myFixture: MyType;
+};
 
-        //use
-        await use(page);
+export const test = base.extend<Fixtures>({
+  myFixture: async ({ page }, use) => {
+    // setup
+    const value = ...;
 
-        //afterEach
-        console.log("clean data");
-    }
+    await use(value);
+
+    // teardown (optional)
+  },
 });
 
-export { testFixture };
+export { expect } from '@playwright/test';
+
 ```
 
 **- File test:**
@@ -201,6 +204,12 @@ testFixture("Dashboard", async ({ dashboard }) => {
 --> để xử lí issue này thì có tính năng merge fixture của Playwright
 - Tạo 1 file index.fixture.ts
 - Thuật ngữ index là kiểu mình sẽ import tất cả những gì liên quan tới file index vào, khi muốn import gì thì chỉ cần export cái file index ra thôi
+
+##### Quy tắc vàng khi viết fixture (nhớ mấy dòng này)
+✔️ 1 fixture = 1 trách nhiệm
+✔️ Fixture gọi Page / API, test không
+✔️ Không thao tác DOM trong test nếu đã có fixture
+✔️ Fixture không assert (trừ setup critical)
 
 ---
 #### Quản lí biến môi trường (Managing environment variables)

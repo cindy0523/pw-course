@@ -14,6 +14,7 @@ export class LoginPage {
     };
 
     async login(userName: string, password: string) {
+        await this.page.goto('https://pw-practice-dev.playwrightvn.com/wp-admin');
         await this.userNameInput.fill(userName);
         await this.passwordInput.fill(password);
         await this.logInBtn.click();

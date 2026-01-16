@@ -17,15 +17,28 @@ export class TagPage extends LoginPage {
         // this.deleteTagBtn = page.locator(`//a[@aria-label='Delete “${name}”']`);
     };
 
-    async fillTagName(tagName: string) {
-        await this.tagNameInput.fill(tagName);
+    async gotoTagPage() {
+        await this.postBtn.click();
+        await this.tagBtn.click();
+        await this.page.waitForLoadState("domcontentloaded");
     };
 
-    async clickAddTag() {
+    async addTag(tagName: string) {
+        await this.tagNameInput.fill(""); //clear data
+        await this.tagNameInput.fill(tagName);
         await this.addTagBtn.click();
+        await this.page.waitForLoadState("networkidle");
     };
 
     async deleteTag(tagName: string) {
-        await this.page.locator(`//a[@aria-label='Delete “${tagName}”']`);
+        const row = this.page.locator(`//tbody//tr//td//a[text()="${tagName}"]`);
+        const deleteLink = this.page.locator(`//a[@aria-label='Delete “${tagName}”']`);
+
+        this.page.once("dialog", dialog => {
+            dialog.accept();
+        });
+
+        await row.hover();
+        await deleteLink.click();
     };
 };
