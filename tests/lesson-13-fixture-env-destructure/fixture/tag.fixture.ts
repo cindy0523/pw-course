@@ -1,4 +1,4 @@
- /* 1. Viết fixture: myTag, login sẵn vào dashboard
+/* 1. Viết fixture: myTag, login sẵn vào dashboard
 vào Posts > tags > tạo sẵn t1, t2. Sau khi test chạy xong, xóa tag đi. */
 
 import { test as base } from "@playwright/test";
