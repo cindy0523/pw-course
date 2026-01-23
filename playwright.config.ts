@@ -31,11 +31,16 @@ export default defineConfig({
   // Setting cho tất cả các test. See https://playwright.dev/docs/api/class-testoptions.
   use: {
     headless: false,
+    // video: {
+    //   mode: "off",
+    //   // Video record screen size
+    //   size: { width: 640, height: 480 },
+    // },
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: process.env.BASE_URL,
 
     // Khi test fail thì retry lần 1, retry fail tiếp thì lưu trace. See https://playwright.dev/docs/trace-viewer
-    trace: 'on-first-retry',
+    trace: "on-first-retry",
   },
 
   /* Config projects để chạy cho nhiều browsers */
