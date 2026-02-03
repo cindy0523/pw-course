@@ -117,11 +117,27 @@ npx playwright test -g "title testcase"
 ```
 npx playwright test "title TC" --trace on
 ```
+- sau đó ở terminal, click vào show report
+- click "View Trace" và check
+- phần Action để xem locator theo từng action
 
-sau đó ở terminal, click vào show report rồi xem video
-#### Emulation
-- Emulation giúp giả lập các thông tin như: locale (địa phương), timezoneId (múi giờ), permission (các quyền)...
+**Cách khác:**
+1. Vào Playwright Extension trên VS Code
+2. Ở tab bên trái, click vào checkbox "Show trace viewer" trong mục "Setting"
+3. Sau đó chạy lại file test bất kì = cách nhấn nút Play
+
+#### Emulation (Mô phỏng)
+
+- Emulation giúp giả lập các thông tin như: 
+  - device
+  - kích thước viewport
+  - locale (địa phương) và timezoneId (múi giờ): thay đổi giờ giấc bên các quốc gia khác
+  - color scheme: giả lập chế độ màu (light/ dark) của hệ điều hành trong browser
+  - geolocation: giả lập vị trí để khỏi bật VPN
+  - permission: giả lập user bấm "allow/deny" trên browser pop-up (bật camera/ bật notification,...)
+
 - Để giả lập các thông tin này, bạn có thể dùng test.use để giả lập ngay trong file test như sau:
+
 ```
 import { test, expect } from '@playwright/test';
 

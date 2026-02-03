@@ -31,34 +31,39 @@ export default defineConfig({
   // Setting cho tất cả các test. See https://playwright.dev/docs/api/class-testoptions.
   use: {
     headless: false,
-    // video: {
-    //   mode: "off",
-    //   // Video record screen size
-    //   size: { width: 640, height: 480 },
-    // },
+
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: process.env.BASE_URL,
 
-    // Khi test fail thì retry lần 1, retry fail tiếp thì lưu trace. See https://playwright.dev/docs/trace-viewer
+    // See more: https://playwright.dev/docs/trace-viewer
     trace: "on-first-retry",
+    // viewport: { width: 1920, height: 1080 },
+    // video: {
+    //   mode: 'on-first-retry',
+    //   size: { width: 1920, height: 1080 },
+    // },
+    locale: 'en-GB',
+
   },
 
   /* Config projects để chạy cho nhiều browsers */
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+      }
     },
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {
@@ -67,7 +72,7 @@ export default defineConfig({
     // },
     // {
     //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
+    //   use: { ...devices['iPad (gen 5)'] },
     // },
 
     /* Test against branded browsers. */

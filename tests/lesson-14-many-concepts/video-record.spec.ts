@@ -5,15 +5,7 @@ test('video', async ({ page }) => {
         await page.goto('https://material.playwrightvn.com/')
     });
 
-    await test.step('click "Bài học 1: Register Page"', async () => {
-        await page.locator("//a[text()='Bài học 1: Register Page (có đủ các element)']").click();
-    });
-
-    await test.step('điền username', async () => {
-        await page.locator("input#username").fill('Thư cute');
-    });
-
-    await test.step('nhập email', async () => {
-        await page.locator('input#email').fill('thucute@mailsac.com');
+    await test.step('click "Bài học 4: Detect user agent"', async () => {
+        await page.locator("//a[text()='Bài học 4: Detect user agent']").click();
     });
 });
