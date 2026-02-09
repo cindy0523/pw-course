@@ -42,7 +42,8 @@ export default defineConfig({
     //   mode: 'on-first-retry',
     //   size: { width: 1920, height: 1080 },
     // },
-    locale: 'en-GB',
+    // colorScheme: 'dark',
+    // offline: false,
 
   },
 

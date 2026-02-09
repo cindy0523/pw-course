@@ -126,7 +126,7 @@ npx playwright test "title TC" --trace on
 2. Ở tab bên trái, click vào checkbox "Show trace viewer" trong mục "Setting"
 3. Sau đó chạy lại file test bất kì = cách nhấn nút Play
 
-#### Emulation (Mô phỏng)
+#### Emulation (Mô phỏng/ Giả lập)
 
 - Emulation giúp giả lập các thông tin như: 
   - device
@@ -153,3 +153,35 @@ test('my test with geolocation', async ({ page })
     await page.waitForTimeOut(60_000);
 });
 ```
+
+#### Drag and drop (Kéo thả)
+
+**Cách 1: dragTo**
+```
+    const start = "//div[@id='piece-1']";
+    const end = "//div[@data-piece='1']";
+
+    await page.dragAndDrop(start, end);
+```
+
+**Cách 2: drag manually**
+```
+    await page.locator(start).hover();
+    await page.mouse.down();
+    await page.locator(end).hover();
+    await page.mouse.up();
+```
+
+#### Global setup and teardown
+
+**1. Global setup:** chạy trước khi tất cả các testcase chạy, chạy MỘT LẦN DUY NHẤT
+
+**2. Global teardown:** chạy sau khi tất cả các testcase chạy, chạy MỘT LẦN DUY NHẤT
+
+**So sánh với fixture:**
+- Fixture có issue là chỉ run mấy cái test mà gọi tới cái fixture đó thôi
+- Để chạy hết hook cho tất cả các test mà không cần sử dụng Fixture thì mình sẽ dùng global setup and teardown
+
+**Project dependency:** 
+- Project B chỉ chạy sau khi Project A chạy xong thành công
+
