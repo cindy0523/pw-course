@@ -10,13 +10,10 @@ dotenv.config({
 });
 
 export default defineConfig({
-  testDir: './tests',
-
-  // Run parallel hay không, nếu false thì ko (chạy tuần tự), nếu true thì chạy song song
+  // testDir: './tests',
   fullyParallel: false,
 
   // chặn test.only trên CI, test.only nghĩa là chỉ chạy test này, bỏ qua test còn lại
-  // test.only chỉ dùng khi debug trên local env
   forbidOnly: !!process.env.CI,
 
   /* Retry on CI only: 2 times */
@@ -49,13 +46,22 @@ export default defineConfig({
 
   /* Config projects để chạy cho nhiều browsers */
   projects: [
+    // {
+    //   name: 'setup db',
+    //   testMatch: /global-setup\.ts/,
+    //   teardown: 'clean up db',
+    // },
+    // {
+    //   name: 'clean up db',
+    //   testMatch: /global-teardown\.ts/,
+    // },
     {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-      }
+      },
+      // dependencies: ['setup db'],
     },
-
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'] },
