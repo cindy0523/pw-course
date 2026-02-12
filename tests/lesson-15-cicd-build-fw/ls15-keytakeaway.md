@@ -61,19 +61,19 @@ Vd:
 (yml là yaml file -> trong này mình sẽ viết các cú pháp liên quan tới Github Action ở định dạng JSON)
 - Viết job, ví dụ:
 ```
-name: Playwright Tests //đặt tên cho job, j cũng đc
-on: //set khi này chạy
+name: Playwright Tests #đặt tên cho job, j cũng đc
+on: #set khi này chạy
   push:
-    branches: [ main, master ] //bắt sự kiện khi push lên nhánh main/ master
+    branches: [ main, master ] #bắt sự kiện khi push lên nhánh main/ master
   pull_request:
-    branches: [ main, master ] //bắt sự kiện khi pull về nhánh main/ master
+    branches: [ main, master ] #bắt sự kiện khi pull về nhánh main/ master
 jobs:
-  test: //tên job, đặt gì cũng đc
-    timeout-minutes: 60 //chạy tối đa 60p
-    runs-on: ubuntu-latest // chạy trên hệ điều hành Ubuntu mới nhất
+  test: #tên job, đặt gì cũng đc
+    timeout-minutes: 60 #chạy tối đa 60p
+    runs-on: ubuntu-latest # chạy trên hệ điều hành Ubuntu mới nhất
     steps:
-    - uses: actions/checkout@v4 //step 1: checkout code về (pull code về) (1 cái có sẵn của github action)
-    - uses: actions/setup-node@v4 //step 2: setup nodejs
+    - uses: actions/checkout@v4 #step 1: checkout code về (pull code về) (1 cái có sẵn của github action)
+    - uses: actions/setup-node@v4 #step 2: setup nodejs
       with:
        node-version: lts/*
     - name: Install dependencies 
@@ -82,7 +82,7 @@ jobs:
       run: npx playwright install --with-deps
     - name: run playwright test
       run: npx playwright test
-    // sau khi chạy xong sẽ có report sinh ra, mình sẽ lưu trữ nó lại (upload artifacts)
+    # sau khi chạy xong sẽ có report sinh ra, mình sẽ lưu trữ nó lại (upload artifacts)
     - name: actions/upload-artifact@v4
       if: ${{ !cancel() }}
       with:
@@ -90,3 +90,8 @@ jobs:
         path: playwright-report/
         retention-days: 30
 ```
+- Chạy CI thì luôn headless: true (chạy ẩn, không bật browser)
+
+**Gitlab:**
+- Giống như Github
+- Gitlab CI syntax khác GitHub Action 1 tí
