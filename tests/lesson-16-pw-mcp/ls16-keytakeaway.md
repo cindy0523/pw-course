@@ -73,4 +73,7 @@
   - LLM k có tool execute 
   --> **MCP cho phép LLM gọi tool thông qua protocol**
 
-
+**Prompt file:**
+- Tạo 1 prompt có thể tái sử dụng, để mình ko phải nhập lại từ đầu
+- Click vào icon Gear > chọn "Prompt file" > chọn folder lưu nó + đặt tên cho prompt
+- Viết xong click nút Play
