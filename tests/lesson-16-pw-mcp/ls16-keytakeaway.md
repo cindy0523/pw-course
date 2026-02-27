@@ -77,3 +77,18 @@
 - Tạo 1 prompt có thể tái sử dụng, để mình ko phải nhập lại từ đầu
 - Click vào icon Gear > chọn "Prompt file" > chọn folder lưu nó + đặt tên cho prompt
 - Viết xong click nút Play
+
+#### Lợi ích của PW MCP + AI Agent
+**1. Explore web app:**
+- Cung cấp URL web và request AI explore, tìm key workflows, gen PW test
+
+**2. Tìm regression + edge case:**
+- Đưa AI explore và suggest issue - rất tốt để exploratory test
+
+**3. Auto browser tasks:**
+- Auto task lặp lại như: data entry, form submissions, workflow phức tạp
+
+**Tips:**
+- **Clear context**, càng clear AI càng help tốt
+- Dùng **git để track** code: đôi khi AI sẽ change/remove code mình quen dùng, dùng Git để control và roll back nếu cần. Nên commit thường xuyên
+- AI không phải lúc nào cũng **up to date**: LLM đc train bởi data cũ, hãy kêu nó sử dụng latest data
