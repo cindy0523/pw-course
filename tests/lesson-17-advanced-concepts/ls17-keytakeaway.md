@@ -77,3 +77,25 @@ test("Login trên mobile viewport", async ({ browser }) => {
     await page.goto("https://www.google.com");
 })
 ```
+
+#### configure test device
+**Device config thực chất gồm những gì?**
+Ví dụ: iPhone 13 profile gồm:
+- viewport
+- userAgent
+- deviceScaleFactor
+- isMobile
+- hasTouch
+
+--> Nó không chỉ mỗi viewport
+
+```
+export default defineConfig({
+  projects: [
+    {
+      name: 'iPhone 13',
+      use: { ...devices['iPhone 13'] },
+    }
+  ]
+})
+```
