@@ -46,15 +46,17 @@ export default defineConfig({
 
   /* Config projects để chạy cho nhiều browsers */
   projects: [
-    // {
-    //   name: 'setup db',
-    //   testMatch: /global-setup\.ts/,
-    //   teardown: 'clean up db',
-    // },
-    // {
-    //   name: 'clean up db',
-    //   testMatch: /global-teardown\.ts/,
-    // },
+    {
+      name: 'api-tests',
+      testDir: './api',
+      use: {
+        baseURL: 'https://api.valentinos-magic-beans.click',
+        extraHTTPHeaders: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
+    },
     {
       name: 'chromium',
       use: {
