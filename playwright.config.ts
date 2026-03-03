@@ -10,8 +10,9 @@ dotenv.config({
 });
 
 export default defineConfig({
-  // testDir: './tests',
-  fullyParallel: false,
+  testDir: './tests',
+  fullyParallel: true,
+  workers: 3,
 
   // chặn test.only trên CI, test.only nghĩa là chỉ chạy test này, bỏ qua test còn lại
   forbidOnly: !!process.env.CI,
@@ -19,8 +20,8 @@ export default defineConfig({
   /* Retry on CI only: 2 times */
   retries: process.env.CI ? 2 : 0,
 
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  // Opt out of parallel tests on CI. (best practice)
+  // workers: process.env.CI ? 3 : 4,
 
   // xuất html report
   reporter: 'html',
@@ -93,6 +94,15 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
+
+    /* Test against environment. */
+    // {
+    //   name: 'staging-chrome',
+    //   use: {
+    //     browserName: 'chromium',
+    //     baseURL: 'https://staging.app.com'
+    //   }
+    // }
   ],
 
   /* Run your local dev server before starting the tests */

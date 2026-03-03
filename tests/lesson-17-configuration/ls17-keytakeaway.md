@@ -1,4 +1,4 @@
-### Một vài advanced concepts:
+### Một vài advanced concepts + configuration:
 
 #### Test annotations/ tag
 - Test annotations là việc bạn "gắn nhãn" hoặc bổ sung meta data vô trong testcase.
@@ -98,4 +98,47 @@ export default defineConfig({
     }
   ]
 })
+```
+
+#### projects trong configuration
+
+**Usage:**
+- trong file playwright.config.ts, thì phần projects sẽ ở dạng array, mình sẽ add nhiều object bên trong
+- project cho phép chạy cùng 1 bộ test nhưng nhiều env khác nhau
+- 1 project = 1 cấu hình riêng biệt
+
+Ví dụ:
+  - test trên Chrome 
+  - test trên firefox
+  - test trên staging, dev, prod env
+
+**Cách worker phân phối theo số projects:**
+Giả sử có:
+- 10 tests
+- 2 project: Chromium, Firefox
+- 4 workers
+
+Vì có 2 projects:
+- Chromium: 10 test
+- Firefox: 10 test
+
+--> Tổng = 20 executions
+
+4 workers sẽ là tổng số ng chạy hết 20 executions
+Playwright sẽ chia:
+- test 1 chrome : worker 1
+- test 2 firefox: worker 2
+- tiếp tục cho tới khi đủ 4 workers
+- worker nào xong trước thì nhận test tiếp (bất kể project nào)
+
+```
+projects: [
+  {
+    name: 'staging-chrome',
+    use: {
+      browserName: 'chromium',
+      baseURL: 'https://staging.app.com'
+    }
+  }
+]
 ```
