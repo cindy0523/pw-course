@@ -12,7 +12,7 @@ dotenv.config({
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
-  workers: 3,
+  workers: 1,
 
   // chặn test.only trên CI, test.only nghĩa là chỉ chạy test này, bỏ qua test còn lại
   forbidOnly: !!process.env.CI,

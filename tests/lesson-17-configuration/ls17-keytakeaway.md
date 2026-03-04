@@ -142,3 +142,17 @@ projects: [
   }
 ]
 ```
+
+#### Mock API
+
+- Playwright cung cấp API để mock và modify network traffic (cả HTTP và HTTPS)
+- Bằng cách sử dụng event listener (request) dể lấy api trước
+
+**1. Mock API request:**
+- Mock API = tự tạo response API giả để trả về thay vì server thật bằng cách intercept API call
+- PW dùng page.route() để intercept
+
+**Khi nào nên mock data?**
+- Khi chưa có API
+- Khi data khó setup, env không ổn định, thay vì đợi BE tạo data mất thời gian/ data dễ bị thay đổi
+- Khi test edge case khó tái hiện
