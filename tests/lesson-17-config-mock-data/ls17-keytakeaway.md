@@ -156,3 +156,6 @@ projects: [
 - Khi chưa có API
 - Khi data khó setup, env không ổn định, thay vì đợi BE tạo data mất thời gian/ data dễ bị thay đổi
 - Khi test edge case khó tái hiện
+
+#### Xử lí event - request
+- Đối với xử lí event: request thì sẽ import { Request } from "@plawwright/test"
