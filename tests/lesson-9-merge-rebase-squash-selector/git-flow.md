@@ -21,15 +21,16 @@ Quy tắc:
 
 **3. Qui trình chuẩn:**
 
-- **Từ develop** → create branch
+**Từ develop → create branch**
 - git checkout develop
 - git pull
 - git checkout -b feature/xxx
-- Dev code → commit → push
+
+**Dev code → commit → push**
 - git push -u origin feature/xxx
 - Tạo Pull Request vào develop
-- Code review (2 người review ở công ty lớn)
-- Merge vào develop
+- Code review (2 người ở công ty)
+- Merge vào 'develop'
 - QA test trên develop environment
 
 **Release flow:**
