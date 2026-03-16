@@ -105,6 +105,24 @@ reporter: [
     ['junit', { outputFile: 'reports-e2e/junit.xml' }],
     ['html', { outputFolder: 'report-e2e/html', open: 'never' }],
 ],
+use: {
+    baseURL,
+    trace: 'retain-on-failure',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+}
 ```
 **Giải thích:**
 - Về mặt trouble shoot và hiểu các test script đang hoạt động ra sao, thì report rất quan trọng
+- chụp hình, quay video lỗi, và trace cho phép đi từng bước để xem
+
+```ts
+webServer: startLocalServer
+    ? {
+        command: 'npm run dev -- --host 127.0.0.1 --port: 8080 --strictPort',
+        url: baseURL,
+        reuseExistingServer: true,
+        timeout: 120_000,
+    }
+    : undefined,
+```
