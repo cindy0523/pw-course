@@ -126,3 +126,21 @@ webServer: startLocalServer
     }
     : undefined,
 ```
+**Giải thích:**
+- command: lệnh chạy server (thứ chạy tay)
+- url: link mà PW dùng để check server ready chưa, nếu url trả response OK -> test bắt đầu
+- reuseExistingServer: 
+  - true: nếu server run rồi thì ko start lại
+  - false: luôn start server mới
+- timeout: thời gian chờ server start (120 * 1000 là chờ 120s ~ 2 phút, viết vậy cho dễ đọc), nếu quá thời gian chờ mà chưa start thì fail luôn
+
+**Cái này giúp:**
+- K cần nhớ chạy server trước khi test
+- Tránh lỗi "test fail vì quên bật app"
+- CI/CD chạy tự động (ko cần có người manually bật server, nên cần config webServer để PW auto bật giúp)
+
+## Fork repository là gì?
+- Copy repo của người khác về Github account của bạn và tha hồ edit nhưng ko ảnh hưởng tới repo gốc trừ khi đề xuất Merge
+- Fork khác Clone ở chỗ, Clone sẽ **copy về máy local**, còn Fork sẽ **copy về Github cá nhân**
+
+## Jenkins
