@@ -144,3 +144,139 @@ webServer: startLocalServer
 - Fork khác Clone ở chỗ, Clone sẽ **copy về máy local**, còn Fork sẽ **copy về Github cá nhân**
 
 ## Jenkins
+
+- Tải sẵn Docker Desktop và setup Linux (lõi hệ điều hành) + Ubuntu (hệ điều hành)
+
+### Setup Jenkins
+1. Mở app Docker Desktop lên để chạy engine
+2. Clone repo này về: https://github.com/vdespa/install-jenkins-docker/
+3. Mở Powershell, trỏ tới thư mục chứa cái này, và nhập câu lệnh
+```bash
+docker build -t my-jenkins .
+```
+- Lệnh này build docker image từ Docker file và đặt tên image là my-jenkins, dấu . là lấy docker file trong folder hiện tại
+- Lần đầu đợi nó build mất 2-10p, vì phải tải base image, mấy lần sau nhanh hơn tầm 1-2p vì docker cache
+4. Start Jenkins
+```bash
+docker compose up -d
+```
+5. Mở Jenkins từ link này: http://localhost:8080/
+6. Với lần đầu tải Jenkins thì cần thêm 1 vài bước setup
+- Cần password Admin và pass có sẵn trong file show trên màn hình
+- Mở app "Docker Desktop", xổ dropdown list Container ra và click vào container "my-jenkins"
+- Nhìn vào "Logs" tab và dò sẽ thấy password, copy và paste vào link local
+- Click vào "Install Suggested Plugin" button trên UI Local
+- Sau khi tải xong thì click "Skip and continue with Admin" rồi process tiếp tới hết
+7. Sau đó vô Jenkins UI, click Setting > Plugins > Available Plugins
+- Tìm "Docker pipeline" và install
+- Tải tiếp "Ansicolor", "HTML Publisher"
+
+8. Khởi động lại jenkins bằng url: http://localhost:8080/restart
+9. Login với Jenkins = admin và password ở bước 6
+10. Vào repo Spanish word flip ... và tạo 1 file "Jenkinsfile"
+11. Nhập cái này
+```groovy
+pipeline {
+    agent any
+    
+    options {
+        ansiColor('xterm')
+    }
+
+    stages {
+        stage('build') {
+            agent {
+                docker {
+                    image 'node:22-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh 'npm ci'
+                sh 'npm run build'
+            }
+        }
+
+        stage('test') {
+            parallel {
+                stage('unit tests') {
+                    agent {
+                        docker {
+                            image 'node:22-alpine'
+                            reuseNode true
+                        }
+                    }
+                    steps {
+                        // Unit tests with Vitest
+                        sh 'npx vitest run --reporter=verbose'
+                    }
+                }
+                stage('integration tests') {
+                    agent {
+                        docker {
+                            image 'mcr.microsoft.com/playwright:v1.54.2-jammy'
+                            reuseNode true
+                        }
+                    }
+                    steps {
+                        sh 'npx playwright test'
+                    }
+                }
+            }
+        }
+
+        stage('deploy') {
+            agent {
+                docker {
+                    image 'alpine'
+                }
+            }
+            steps {
+                // Mock deployment which does nothing
+                echo 'Mock deployment was successful!'
+            }
+        }
+
+        stage('e2e') {
+            agent {
+                docker {
+                    image 'mcr.microsoft.com/playwright:v1.54.2-jammy'
+                    reuseNode true
+                }
+            }
+            environment {
+                E2E_BASE_URL = 'https://spanish-cards.netlify.app/'
+            }
+            steps {
+                sh 'npx playwright test'
+            }
+        }
+    }
+}
+```
+
+### Jobs
+- Jobs trong Jenkins là 1 cái task bạn đưa cho Jenkins làm = 1 qui trình tự động
+
+**Ví dụ:**
+Job "Run Automation Test":
+1. Pull code từ Github
+2. Cài dependency
+3. Chạy test
+4. Xuất report
+--> Tất cả gói gọn trong 1 job
+
+**Job gồm:**
+- Source code (Github)
+- Các bước chạy (steps)
+- Khi nào chạy (triggers)
+- Xuất report (pass/fail)
+
+### Create Job
+- Click Create Job > đặt tên giống repo để dễ xác định
+- Chọn 'Pipeline' > click 'OK'
+- Scroll xún mục Pipeline > click 'pipeline script from SCM' vì mình sẽ pull pipeline config này về repo mình
+- Chọn Git > paste repo link vô 
+- Sửa tên branch master thành main
+- Click Save
+- Làm xong bấm nút Build Now bên trái
