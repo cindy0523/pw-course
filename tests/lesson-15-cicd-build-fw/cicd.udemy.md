@@ -280,3 +280,7 @@ Job "Run Automation Test":
 - Sửa tên branch master thành main
 - Click Save
 - Làm xong bấm nút Build Now bên trái
+
+### Publish PW report:
+- Nếu gặp problem dưới local thì đc nhưng trong Jenkins thì ko được, thì report lỗi rất quan trọng
+- Click vào "workspace" tab của jenkins
